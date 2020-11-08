@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/menu_logout"
+        android:id="@+id/menu_logout"/>
+    <item
+        android:title="@string/menu_establecer_disponible"
+        android:id="@+id/menu_disponible"/>
+    <item
+        android:title="@string/menu_listar_disponibles"
+        android:id="@+id/menu_listar_disponibles"/>
+
+
+</menu>

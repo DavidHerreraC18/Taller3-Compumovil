@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Taller3</string>
+    //Menu
+    <string name="menu_logout">Cerrar Sesión</string>
+    <string name="menu_establecer_disponible">Establecer como Disponible</string>
+    <string name="menu_establecer_no_disponible">Establecer como No Disponible</string>
+    <string name="menu_listar_disponibles">Listar Usuarios Disponibles</string>
+    //Inicio Sesion
+    <string name="is_ingreso">Ingreso</string>
+    <string name="is_registrate">Registrate</string>
+    <string name="is_inicia_sesion">Inicia Sesión</string>
+    <string name="is_correo">Correo</string>
+    <string name="is_contrasena">Contraseña</string>
+
+    //ItemUsuariosDisp
+    <string name="itemUdi_ver_usuario">Ver Usuario</string>
+
+    //Registro
+    <string name="reg_registro">Registro</string>
+    <string name="reg_nombre">Nombres</string>
+    <string name="reg_apellido">Apellidos</string>
+    <string name="reg_correo">Correo</string>
+    <string name="reg_contra">Contraseña</string>
+    <string name="reg_identif">Identificación</string>
+    <string name="reg_ubi">Mi Ubicación es:</string>
+    <string name="reg_obtener_ubi">Obtener Ubicación</string>
+    <string name="reg_registrarse">Registrarse</string>
+
+    //RegistroUbi
+    <string name="regubi_ubi">Seleccione su Ubicación</string>
+    <string name="regubi_seleccionar">Seleccionar Punto</string>
+
+    //permisos
+    <string name="permissions_needed">Se necesita que de acceso a los permisos</string>
+    <string name="permission_denied">Permiso denegado</string>
+    <string name="permission_denied_explanation">Sin ese permiso no puede usar esta funcionalidad</string>
+    <string name="permission_sure">Estoy seguro</string>
+    <string name="permission_retry">Reintentar</string>
+    <string name="title_activity_maps">Map</string>
+
+
+</resources>
