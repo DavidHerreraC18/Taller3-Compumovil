@@ -20,30 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <Button
-        android:id="@+id/boton_login"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:background="@drawable/rounded_corners_button"
-        android:text="Iniciar Sesion"
-        android:textColor="@color/colorWhite"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/textView28"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/boton_registrarse"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:background="@drawable/rounded_corners_button"
-        android:text="Registrarse"
-        android:textColor="@color/colorWhite"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
     <ImageView
         android:id="@+id/logo"
         android:layout_width="191dp"
@@ -54,52 +30,80 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon" />
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tit_ingresa"
+        app:layout_constraintVertical_bias="0.0">
 
-    <EditText
-        android:id="@+id/usernameInicioSesion"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_edit_text"
-        android:ems="10"
-        android:hint="@string/is_correo"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/passwordInicioSesion"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_edit_text"
-        android:ems="10"
-        android:hint="@string/is_contrasena"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            <Button
+                android:id="@+id/boton_registrarse"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_corners_button"
+                android:text="Registrarse"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:onClick="toRegistro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/boton_login" />
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            <Button
+                android:id="@+id/boton_login"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_corners_button"
+                android:text="Iniciar Sesion"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:onClick="iniciarSesion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordInicioSesion" />
+
+            <EditText
+                android:id="@+id/usernameInicioSesion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_edit_text"
+                android:ems="10"
+                android:hint="@string/is_correo"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/passwordInicioSesion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_edit_text"
+                android:ems="10"
+                android:hint="@string/is_contrasena"
+                android:inputType="textPassword"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usernameInicioSesion" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

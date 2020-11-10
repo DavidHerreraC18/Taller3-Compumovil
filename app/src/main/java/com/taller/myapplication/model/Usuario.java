@@ -1,68 +1,68 @@
 package com.taller.myapplication.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
-import com.google.android.gms.maps.model.LatLng;
-
-import java.io.FileReader;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@Accessors(chain =  true)
-public class Usuario implements Parcelable {
+public class Usuario  {
 
     private String nombreUsuario;
 
     private String apellidoUsuario;
 
-    private String correo;
-
-    private String contra;
-
     private String identificacion;
 
-    private Ubicacion ubicacionActual;
+    private String ubicacionActual;
 
+    private String disponible;
 
+    public Usuario()
+    {
 
-    protected Usuario(Parcel in) {
-        nombreUsuario = in.readString();
-        apellidoUsuario = in.readString();
-        correo = in.readString();
-        contra = in.readString();
-        identificacion = in.readString();
     }
 
-    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
-        @Override
-        public Usuario createFromParcel(Parcel in) {
-            return new Usuario(in);
-        }
-
-        @Override
-        public Usuario[] newArray(int size) {
-            return new Usuario[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public Usuario(String nombreUsuario, String apellidoUsuario, String identificacion, String ubicacionActual) {
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
+        this.identificacion = identificacion;
+        this.ubicacionActual = ubicacionActual;
+        this.disponible = "false";
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(nombreUsuario);
-        parcel.writeString(apellidoUsuario);
-        parcel.writeString(correo);
-        parcel.writeString(contra);
-        parcel.writeString(identificacion);
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
+    }
+
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public String getUbicacionActual() {
+        return ubicacionActual;
+    }
+
+    public void setUbicacionActual(String ubicacionActual) {
+        this.ubicacionActual = ubicacionActual;
+    }
+
+    public String getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(String disponible) {
+        this.disponible = disponible;
     }
 }
