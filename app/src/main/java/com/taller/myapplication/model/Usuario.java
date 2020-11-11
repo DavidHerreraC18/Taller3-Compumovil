@@ -13,6 +13,10 @@ public class Usuario  {
 
     private String disponible;
 
+    private String notificado;
+
+
+
     public Usuario()
     {
 
@@ -24,6 +28,7 @@ public class Usuario  {
         this.identificacion = identificacion;
         this.ubicacionActual = ubicacionActual;
         this.disponible = "false";
+        this.notificado = "false";
     }
 
     public String getNombreUsuario() {
@@ -64,5 +69,13 @@ public class Usuario  {
 
     public void setDisponible(String disponible) {
         this.disponible = disponible;
+    }
+
+    public String getNotificado() {
+        return notificado;
+    }
+
+    public void setNotificado(String notificado) {
+        this.notificado = notificado;
     }
 }

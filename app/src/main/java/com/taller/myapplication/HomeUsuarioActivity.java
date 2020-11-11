@@ -205,11 +205,13 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
             if(usuario.getDisponible().equals("true"))
             {
                 myRef.child("disponible").setValue("false");
+                myRef.child("notificado").setValue("false");
                 updateMenuTitles(false);
             }
             else
             {
                 myRef.child("disponible").setValue("true");
+                myRef.child("notificado").setValue("true");
                 updateMenuTitles(true);
                 //NotificarOtrosUsuarios
             }
@@ -339,6 +341,9 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
                 }
             }
         }else{
+            Intent intent = new Intent(HomeUsuarioActivity.this, InicioSesionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
             finish();
         }
     }

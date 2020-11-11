@@ -471,6 +471,7 @@ public class RegistroActivity extends AppCompatActivity {
             return null;
         }
         nuevo.setDisponible("false");
+        nuevo.setNotificado("false");
         nuevo.setApellidoUsuario(apellido);
         nuevo.setNombreUsuario(nombre);
         nuevo.setIdentificacion((String) spinnerTipoIdenti.getSelectedItem() + identi);

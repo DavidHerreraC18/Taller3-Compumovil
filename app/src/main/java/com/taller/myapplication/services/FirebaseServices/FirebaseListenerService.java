@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,12 +71,17 @@ public class FirebaseListenerService extends JobIntentService {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                if(!dataSnapshot.getKey().equals(firebaseAuth.getCurrentUser().getUid())) {
-                    if (usuario.getDisponible().equals("true")) {
-                        buildAndShowNotification("Nuevo Usuario Activo", "El usuario "
-                                + usuario.getNombreUsuario() + " " + usuario.getApellidoUsuario() + " se encuentra activo", dataSnapshot.getKey());
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null)
+                {
+                    if(!dataSnapshot.getKey().equals(user.getUid())) {
+                        if (usuario.getDisponible().equals("true") && usuario.getNotificado().equals("true")) {
+                            buildAndShowNotification("Nuevo Usuario Activo", "El usuario "
+                                    + usuario.getNombreUsuario() + " " + usuario.getApellidoUsuario() + " se encuentra activo", dataSnapshot.getKey());
+                        }
                     }
                 }
+
             }
 
             @Override
@@ -101,6 +107,7 @@ public class FirebaseListenerService extends JobIntentService {
         mBuilder.setContentTitle(title);
         mBuilder.setContentText(message);
         mBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        myRef.child(id).child("notificado").setValue("false");
 
         Intent intent;
         if(firebaseAuth.getCurrentUser()!= null){
