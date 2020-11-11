@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -19,6 +21,7 @@ import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -57,6 +60,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.taller.myapplication.model.Usuario;
+import com.taller.myapplication.services.FirebaseServices.FirebaseListenerService;
 import com.taller.myapplication.services.MapsServices.MapService;
 import com.taller.myapplication.services.permissionService.PermissionService;
 
@@ -77,6 +81,7 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
     private FirebaseDatabase database;
     public static final String TAG = "Taller3";
     public static final String PATH_USERS="usuarios/";
+    public static String CHANNEL_ID = "FIREBASE_NOTIF_CHANNEL";
 
     private Menu myMenu;
 
@@ -107,6 +112,7 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_usuario);
+        createNotificationChannel();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mAuth = FirebaseAuth.getInstance();
@@ -114,7 +120,7 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
         database = FirebaseDatabase.getInstance();
         permissionService = new PermissionService();
         FirebaseUser user = mAuth.getCurrentUser();
-        myRef = database.getReference(PATH_USERS+user.getUid());
+        myRef = database.getReference(PATH_USERS + user.getUid());
         myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot)
@@ -189,8 +195,9 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
         if(id == R.id.menu_logout)
         {
             mAuth.signOut();
-            //Intent intent = new Intent(HomeUsuarioActivity.this, InicioSesionActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Intent intent = new Intent(HomeUsuarioActivity.this, InicioSesionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
             finish();
         }
         if(id == R.id.menu_disponible)
@@ -219,9 +226,9 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
         {
             MenuItem menuItem = myMenu.findItem(R.id.menu_disponible);
             if (valor) {
-                menuItem.setTitle(R.string.menu_establecer_no_disponible);
+                menuItem.setTitle(getString(R.string.menu_establecer_no_disponible));
             } else {
-                menuItem.setTitle(R.string.menu_establecer_disponible);
+                menuItem.setTitle(getString(R.string.menu_establecer_disponible));
             }
         }
     }
@@ -309,6 +316,12 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         updateUI(user);
+        loadFirebaseBackgroundService();
+    }
+
+    private void loadFirebaseBackgroundService() {
+        Intent intent = new Intent(this, FirebaseListenerService.class);
+        FirebaseListenerService.enqueueWork(this,intent);
     }
 
     private void updateUI(FirebaseUser user){
@@ -393,6 +406,23 @@ public class HomeUsuarioActivity extends AppCompatActivity implements OnMapReady
         catch (JSONException jsonex)
         {
             jsonex.printStackTrace();
+        }
+    }
+
+    private void createNotificationChannel() {
+// Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "channel";
+            String description = "channel description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//IMPORTANCE_MAX MUESTRA LA NOTIFICACIÓN ANIMADA
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+// Register the channel with the system; you can't change the importance
+// or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }

@@ -125,6 +125,7 @@ public class SeguimientoUsuarioDisponible extends AppCompatActivity implements O
         database = FirebaseDatabase.getInstance();
         permissionService = new PermissionService();
         FirebaseUser user = mAuth.getCurrentUser();
+        updateUI(user);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         myRef = database.getReference(PATH_USERS+user.getUid());
         myRef.addValueEventListener(new ValueEventListener() {
@@ -139,7 +140,7 @@ public class SeguimientoUsuarioDisponible extends AppCompatActivity implements O
                 Log.w(TAG, "error en la consulta", databaseError.toException());
             }
         });
-
+        Log.w(TAG, id);
         myRefSeguimiento = database.getReference(PATH_USERS+id);
         myRefSeguimiento.addValueEventListener(new ValueEventListener() {
             @Override
@@ -225,7 +226,7 @@ public class SeguimientoUsuarioDisponible extends AppCompatActivity implements O
                     {
                         mMarkerPosActualSeguimiento.remove();
                     }
-                    mMarkerPosActual = mMap.addMarker(new MarkerOptions().position(ubiActualSeguimiento).title(usuarioSeguimiento.getNombreUsuario()+" "+usuarioSeguimiento.getApellidoUsuario()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+                    mMarkerPosActualSeguimiento= mMap.addMarker(new MarkerOptions().position(ubiActualSeguimiento).title(usuarioSeguimiento.getNombreUsuario()+" "+usuarioSeguimiento.getApellidoUsuario()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
                     if(!ubiActualSeguimiento.equals(UASeguimiento))
                     {
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(ubiActualSeguimiento));
@@ -336,6 +337,9 @@ public class SeguimientoUsuarioDisponible extends AppCompatActivity implements O
 
             }
         }else{
+            Intent intent = new Intent(SeguimientoUsuarioDisponible.this, InicioSesionActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
             finish();
         }
     }
